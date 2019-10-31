@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Domain.League>
+
+
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+<br />
+<br />
+<h2 class="text-center">Leagues</h2>
+<br />
+<p>
+    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
+</p>
+<br />
+<table class="table table-hover table-striped table-borderless text-center">
+    <tr>
+        <th>
+            <h5>@Html.DisplayNameFor(model => model.Name)</h5>
+        </th>
+        <th>
+            <h5>@Html.DisplayNameFor(model => model.Logo)</h5>
+        </th>
+        <th>
+            <h5># Teams</h5>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class=" align-middle">
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td class=" align-middle">
+                @if (!string.IsNullOrEmpty(item.Logo))
+                {
+                    <img src="@Url.Content(item.Logo)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                }
+
+            </td>
+            <td class=" align-middle">
+                @Html.DisplayFor(modelItem => item.Teams.Count)
+            </td>
+            <td class=" align-middle">
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.LeagueId }, new { @class = "btn btn-primary"})
+                @Html.ActionLink("Details", "Details", new { id = item.LeagueId }, new { @class = "btn btn-success" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.LeagueId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+}

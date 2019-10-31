@@ -1,0 +1,88 @@
+﻿@model Domain.League
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<br />
+<h2 class="text-center">Details League</h2>
+<br />
+<br />
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal text-center">
+        <dt>
+            
+            @Html.DisplayFor(model => model.Name)
+        </dt>
+
+        <dt>
+            
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.Logo))
+            {
+                <img src="@Url.Content(Model.Logo)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+            }
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit League", "Edit", new { id = Model.LeagueId }, new { @class="btn btn-secondary"}) 
+    @Html.ActionLink("Create Team", "CreateTeam", new { id = Model.LeagueId }, new { @class="btn btn-primary"}) 
+    @Html.ActionLink("Back to List", "Index", new { }, new { @class="btn btn-success"})
+</p>
+<h4>Teams</h4>
+@if (Model.Teams.Count == 0)
+{
+    <h5>No teams registered yet</h5>
+}
+else
+{
+    <table class="table table-hover table-striped table-borderless text-center">
+        <tr>
+            <th>
+                <h5>@Html.DisplayNameFor(model => model.Teams.FirstOrDefault().Name)</h5>
+            </th>
+            <th>
+                <h5>@Html.DisplayNameFor(model => model.Teams.FirstOrDefault().Logo)</h5>
+            </th>
+            <th>
+                <h5>@Html.DisplayNameFor(model => model.Teams.FirstOrDefault().Initials)</h5>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Teams.OrderBy(t => t.Name))
+        {
+            <tr>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="align-middle">
+                    @if (!string.IsNullOrEmpty(item.Logo))
+                    {
+                        <img src="@Url.Content(item.Logo)" alt="Image" style="width:50px;height:50px;max-width: 100%; height: auto;" />
+                    }
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Initials)
+                </td>
+                <td>
+
+
+
+                    @Html.ActionLink("Edit", "EditTeam", new { id = item.TeamId }, new { @class ="btn btn-primary"}) 
+                     
+                    @Html.ActionLink("Delete", "DeleteTeam", new { id = item.TeamId }, new { @class = "btn btn-danger", onClick = "return confirm('Are you sure to delete this record?');" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}

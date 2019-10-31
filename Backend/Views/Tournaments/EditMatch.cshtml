@@ -1,0 +1,102 @@
+﻿@model Backend.Models.MatchView
+@{
+    ViewBag.Title = "Edit";
+}
+<br />
+<br />
+<h2 class="text-center text-primary">Edit Match</h2>
+<br />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MatchId)
+        @Html.HiddenFor(model => model.DateId)
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.DateString, htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                <div class='input-group date' id='datepicker' style="width:280px">
+                    @Html.EditorFor(model => model.DateString, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.DateString, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.TimeString, htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                <div class='input-group date' id='timepicker' style="width:280px">
+                    @Html.EditorFor(model => model.TimeString, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                @Html.ValidationMessageFor(model => model.TimeString, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.LocalLeagueId, "Local League", htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("LocalLeagueId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LocalLeagueId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.LocalId, "Local", htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("LocalId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.LocalId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.VisitorLeagueId, "Visitor League", htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("VisitorLeagueId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VisitorLeagueId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.VisitorId, "Visitor", htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("VisitorId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.VisitorId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.TournamentGroupId, "Tournament Group", htmlAttributes: new { @class = "control-label col-md-4" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("TournamentGroupId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TournamentGroupId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <h5>@Html.LabelFor(model => model.StatusId, "Status", htmlAttributes: new { @class = "control-label col-md-2" })</h5>
+            <div class="col-md-6">
+                @Html.DropDownList("StatusId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StatusId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6 text-right" >
+                @Html.ActionLink("Back to Date", "DetailsDate", new { id = Model.DateId }, new { @class = "btn btn-success" })
+                <input type="submit" value="Save" class="btn btn-primary" />
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        var Url = '@Url.Action("GetTeams", "Generic")';
+    </script>
+
+}
