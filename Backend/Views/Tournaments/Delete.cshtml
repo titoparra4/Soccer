@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "Delete";
 }
+<br />
+<br />
+<h2 class="text-center">Delete Tournament</h2>
+<br />
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
+<h3 class="text-danger">Are you sure you want to delete this?</h3>
 <div>
-    <h4>Tournament</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -24,7 +26,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Logo)
+            @if (!string.IsNullOrEmpty(Model.Logo))
+            {
+                <img src="@Url.Content(Model.Logo)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+            }
         </dd>
 
     </dl>
@@ -32,9 +37,10 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+    <div class="form-actions no-color">
+        @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-success"})
+        <input type="submit" value="Delete" class="btn btn-danger" />
+
+    </div>
     }
 </div>
